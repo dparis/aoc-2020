@@ -11,11 +11,10 @@
 
 (defn ^:private day-1-result
   []
-  ;; (build-result
-  ;;  1
-  ;;  (day-1/calculate-module-fuel-requirement day-1/input)
-  ;;  (day-1/calculate-total-fuel-requirement day-1/input))
-  )
+  (build-result
+   1
+   (day-1/product-of-pair-with-2020-sum day-1/parsed-entries)
+   (day-1/product-of-3-tuple-with-2020-sum day-1/parsed-entries)))
 
 (defn ^:private print-result-table
   []
