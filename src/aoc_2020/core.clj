@@ -1,6 +1,7 @@
 (ns aoc-2020.core
   (:require [aoc-2020.day-1 :as day-1]
             [aoc-2020.day-2 :as day-2]
+            [aoc-2020.day-3 :as day-3]
             [clojure.pprint :as pp])
   (:gen-class))
 
@@ -24,10 +25,18 @@
    (day-2/valid-password-count day-2/parsed-pw-rules)
    (day-2/valid-positional-password-count day-2/parsed-pw-rules)))
 
+(defn ^:private day-3-result
+  []
+  (build-result
+   3
+   (day-3/calculate-trees-on-slope day-3/parsed-map-input [3 1])
+   (day-3/calculate-tree-product-for-slopes day-3/parsed-map-input day-3/slope-list)))
+
 (defn ^:private print-result-table
   []
   (let [results (->> (vector (future (day-1-result))
-                             (future (day-2-result)))
+                             (future (day-2-result))
+                             (future (day-3-result)))
                      (mapv deref))]
     (pp/print-table ["Day" "First Star Answer" "Second Star Answer"] results)))
 
