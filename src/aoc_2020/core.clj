@@ -3,6 +3,7 @@
             [aoc-2020.day-2 :as day-2]
             [aoc-2020.day-3 :as day-3]
             [aoc-2020.day-4 :as day-4]
+            [aoc-2020.day-5 :as day-5]
             [clojure.pprint :as pp])
   (:gen-class))
 
@@ -40,12 +41,20 @@
    (day-4/calculate-valid-entries-1 day-4/parsed-batch-input)
    (day-4/calculate-valid-entries-2 day-4/parsed-batch-input)))
 
+(defn ^:private day-5-result
+  []
+  (build-result
+   5
+   (day-5/calculate-highest-seat-id day-5/decoded-passes-input)
+   (day-5/calculate-your-seat-id day-5/decoded-passes-input)))
+
 (defn ^:private print-result-table
   []
   (let [results (->> (vector (future (day-1-result))
                              (future (day-2-result))
                              (future (day-3-result))
-                             (future (day-4-result)))
+                             (future (day-4-result))
+                             (future (day-5-result)))
                      (mapv deref))]
     (pp/print-table ["Day" "First Star Answer" "Second Star Answer"] results)))
 
