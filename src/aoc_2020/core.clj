@@ -7,6 +7,7 @@
             [aoc-2020.day-6 :as day-6]
             [aoc-2020.day-7 :as day-7]
             [aoc-2020.day-8 :as day-8]
+            [aoc-2020.day-9 :as day-9]
             [clojure.pprint :as pp])
   (:gen-class))
 
@@ -72,6 +73,13 @@
    (day-8/calculate-value-before-loop day-8/parsed-code-input)
    (day-8/calculate-fixed-code-value day-8/parsed-code-input)))
 
+(defn ^:private day-9-result
+  []
+  (build-result
+   9
+   (day-9/calculate-first-invalid-value day-9/parsed-data-input)
+   (day-9/calculate-xmas-weakness day-9/parsed-data-input)))
+
 (defn ^:private print-result-table
   []
   (let [results (->> (vector (future (day-1-result))
@@ -81,7 +89,8 @@
                              (future (day-5-result))
                              (future (day-6-result))
                              (future (day-7-result))
-                             (future (day-8-result)))
+                             (future (day-8-result))
+                             (future (day-9-result)))
                      (mapv deref))]
     (pp/print-table ["Day" "First Star Answer" "Second Star Answer"] results)))
 
