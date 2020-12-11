@@ -6,6 +6,7 @@
             [aoc-2020.day-5 :as day-5]
             [aoc-2020.day-6 :as day-6]
             [aoc-2020.day-7 :as day-7]
+            [aoc-2020.day-8 :as day-8]
             [clojure.pprint :as pp])
   (:gen-class))
 
@@ -64,6 +65,13 @@
    (day-7/calculate-shiny-gold-containers day-7/parsed-bag-rules)
    (day-7/calculate-shiny-gold-contents-count day-7/parsed-bag-rules )))
 
+(defn ^:private day-8-result
+  []
+  (build-result
+   8
+   (day-8/calculate-value-before-loop day-8/parsed-code-input)
+   (day-8/calculate-fixed-code-value day-8/parsed-code-input)))
+
 (defn ^:private print-result-table
   []
   (let [results (->> (vector (future (day-1-result))
@@ -72,7 +80,8 @@
                              (future (day-4-result))
                              (future (day-5-result))
                              (future (day-6-result))
-                             (future (day-7-result)))
+                             (future (day-7-result))
+                             (future (day-8-result)))
                      (mapv deref))]
     (pp/print-table ["Day" "First Star Answer" "Second Star Answer"] results)))
 
