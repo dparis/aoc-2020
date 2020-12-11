@@ -5,6 +5,7 @@
             [aoc-2020.day-4 :as day-4]
             [aoc-2020.day-5 :as day-5]
             [aoc-2020.day-6 :as day-6]
+            [aoc-2020.day-7 :as day-7]
             [clojure.pprint :as pp])
   (:gen-class))
 
@@ -56,6 +57,13 @@
    (day-6/calculate-positive-answer-count day-6/parsed-form-group-input)
    (day-6/calculate-unanimous-answer-count day-6/parsed-form-group-input)))
 
+(defn ^:private day-7-result
+  []
+  (build-result
+   7
+   (day-7/calculate-shiny-gold-containers day-7/parsed-bag-rules)
+   (day-7/calculate-shiny-gold-contents-count day-7/parsed-bag-rules )))
+
 (defn ^:private print-result-table
   []
   (let [results (->> (vector (future (day-1-result))
@@ -63,7 +71,8 @@
                              (future (day-3-result))
                              (future (day-4-result))
                              (future (day-5-result))
-                             (future (day-6-result)))
+                             (future (day-6-result))
+                             (future (day-7-result)))
                      (mapv deref))]
     (pp/print-table ["Day" "First Star Answer" "Second Star Answer"] results)))
 
